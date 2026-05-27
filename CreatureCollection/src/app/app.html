@@ -1,3 +1,5 @@
 <main class="main">
-  <h2>creature Collection program (pOKEDEX)</h2>
+  <h2>PalDex</h2>
+  <app-pal-form (newPal)="addPal($event)"></app-pal-form>
+  <app-pal-list [palList]="palArray" (deletedPal)="handlePalDeletion($event)" (trainedPal)="handleTrainedPal($event)"></app-pal-list>
 </main>

@@ -1,0 +1,18 @@
+<section>
+    @for (pal of palCards; track $index) {
+        <div>
+            <h3>{{pal.palName}}</h3>
+            <img [src]="palImage">
+            <p> Level {{pal.palLevel}}  @if (pal.palLevel === 65) {*max*} </p>
+            <p>{{pal.palType}}</p>
+            @if (pal.isFavorite) {
+                <img [src]="favorite" class="favorite">
+            } 
+            <br>
+            <button (click)="onPalTrained(pal.palLevel,$index)">Train</button>
+            <button (click)="onPalDelete($index)">Delete</button>
+        </div>
+    }
+    
+</section>
+

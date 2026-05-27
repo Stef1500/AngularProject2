@@ -1,0 +1,44 @@
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div {
+    box-sizing: border-box;
+    border-color: rgb(199, 196, 196);
+    width: 300px;
+    height: 450px;
+    background-color: rgba(255, 255, 255, 0.747);
+    border-width:0.2ch;
+    border-radius: 10%;
+    border-style:solid;
+    margin: 10px;
+}
+
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+.favorite {
+    height: 20px;
+    width: 20px;
+}
+
+button {
+    margin-top: 90px;
+    color: white;
+    background-color: darkcyan;
+    border-width: 0cap;
+    padding: 5px 10px;
+    border-radius: 20%;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+button:hover {
+    background-color: rgb(72, 180, 180);
+    
+}
+

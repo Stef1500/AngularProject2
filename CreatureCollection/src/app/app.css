@@ -1,0 +1,11 @@
+:host {
+    display: flex;
+    background-color: rgb(231, 227, 221);
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
