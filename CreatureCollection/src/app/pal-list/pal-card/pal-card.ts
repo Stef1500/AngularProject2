@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Pal } from '../../pal-form/pal-form';
-
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Pal } from '../../models/pal';
+import { PalCollection } from '../../service/pal-collection';
 @Component({
   selector: 'app-pal-card',
   imports: [],
@@ -11,17 +11,18 @@ export class PalCard {
   palImage = 'Anubis_icon.png';
   favorite = 'favoritePalIcon.png';
 
-  @Input() palCards: Pal[] = [];
+  palCollectionService = inject(PalCollection);
 
-  @Output() deletedPal = new EventEmitter<number>();
-  @Output() trainedPal = new EventEmitter<number>();
+  palCards: Pal[] = this.palCollectionService.palCollection;
+
+
   
   onPalDelete(index: number) {
-    this.deletedPal.emit(index);
+    this.palCollectionService.handlePalDeletion(index);
   }
   onPalTrained(level: number, index: number) {
     if (level < 65) {
-      this.trainedPal.emit(index);
+      this.palCollectionService.handleTrainedPal(index);
     }
   }
 

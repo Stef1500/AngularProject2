@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input,Output } from '@angular/core';
+import { Component, EventEmitter, Input,Output, inject } from '@angular/core';
 import { PalCard } from "./pal-card/pal-card";
-import { Pal } from '../pal-form/pal-form';
+import { Pal } from '../models/pal';
+import { PalCollection } from '../service/pal-collection';
 
 @Component({
   selector: 'app-pal-list',
@@ -10,17 +11,8 @@ import { Pal } from '../pal-form/pal-form';
 })
 export class PalList {
 
-  @Input() palList: Pal[] = [];
+  palCollectionService = inject(PalCollection);
 
-  @Output() deletedPal = new EventEmitter<number>();
-  @Output() trainedPal = new EventEmitter<number>();
-
-  onDeletedPal(index: number) {
-    this.deletedPal.emit(index);
-  }
-
-  onPalTrained(index: number) {
-    this.trainedPal.emit(index);
-  }
+  palList: Pal[] = this.palCollectionService.palCollection;
 
 }

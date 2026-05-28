@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { Pal } from '../models/pal';
+import { PalCollection } from '../service/pal-collection';
 
 @Component({
   selector: 'app-pal-form',
@@ -14,7 +16,8 @@ export class PalForm {
   isFavorite = new FormControl('Yes')
 
 
-  @Output() newPal = new EventEmitter<Pal>(); //$event to be sent to app
+  palCollectionService = inject(PalCollection);
+
 
   submitPal() {
     const newPalName = this.palName.value?.trim();
@@ -37,14 +40,8 @@ export class PalForm {
         isFavorite: booleanFavorite
       };
 
-        this.newPal.emit(createdPal);
+        this.palCollectionService.addPal(createdPal);
     }
   }
 }
 
-export interface Pal {
-  palName: string,
-  palType: string,
-  palLevel: number,
-  isFavorite: boolean
-}

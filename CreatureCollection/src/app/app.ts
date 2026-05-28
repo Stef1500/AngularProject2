@@ -1,7 +1,9 @@
-import { Component, signal, Input, Output, EventEmitter } from '@angular/core';
+import { Component, signal, Input, Output, EventEmitter, inject } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { Pal, PalForm } from "./pal-form/pal-form";
+import { PalForm } from "./pal-form/pal-form";
 import { PalList } from "./pal-list/pal-list";
+import { Pal } from './models/pal';
+import { PalCollection } from './service/pal-collection';
 
 @Component({
   selector: 'app-root',
@@ -13,21 +15,13 @@ export class App {
   protected readonly title = signal('CreatureCollection');
 
 
-  palArray: Pal[] = [];
+  savedPals = localStorage.getItem('pals'); 
 
+  palCollectionService = inject(PalCollection);
 
-  addPal(newPal: Pal) {
-
-    this.palArray.push(newPal);
-    console.log(this.palArray);
-    
-  }
-
-  handlePalDeletion(index: number) {
-    this.palArray.splice(index,1);
-  }
-
-  handleTrainedPal(index: number) {
-    this.palArray[index].palLevel += 1;
+  constructor() {
+    if (this.savedPals) {
+      this.palCollectionService.palCollection = JSON.parse(this.savedPals);
+    }
   }
 } 
