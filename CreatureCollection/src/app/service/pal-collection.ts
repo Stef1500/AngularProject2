@@ -30,8 +30,10 @@ export class PalCollection {
 
   addPal(newPal: Pal) {
     //localStorage.setItem('pals',JSON.stringify(this.palCollection));
-    this.http.post("http://localhost:8080/api/pals", newPal).subscribe( () => {
-          this.loadPals();
+    this.http.post("http://localhost:8080/api/pals", newPal).subscribe({
+      next: () => {
+        this.loadPals();
+      }
     });
     //this.palCollection.push(newPal);
   }
@@ -52,8 +54,10 @@ export class PalCollection {
     const pal = this.palCollection()[index];
     const updatedPal = {... pal, palLevel: pal.palLevel + 1};
     //localStorage.setItem('pals',JSON.stringify(this.palCollection));
-    this.http.put(`http://localhost:8080/api/pals/${pal.palId}`,updatedPal).subscribe(() => {
-      this.loadPals();
+    this.http.put(`http://localhost:8080/api/pals/${pal.palId}`,updatedPal).subscribe({
+      next: () => {
+        this.loadPals();
+      }
     });
   }
 }
