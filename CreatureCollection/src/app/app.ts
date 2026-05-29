@@ -4,6 +4,7 @@ import { PalForm } from "./pal-form/pal-form";
 import { PalList } from "./pal-list/pal-list";
 import { Pal } from './models/pal';
 import { PalCollection } from './service/pal-collection';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +15,15 @@ import { PalCollection } from './service/pal-collection';
 export class App {
   protected readonly title = signal('CreatureCollection');
 
-
-  savedPals = localStorage.getItem('pals'); 
+  //savedPals = localStorage.getItem('pals'); 
 
   palCollectionService = inject(PalCollection);
 
   constructor() {
-    if (this.savedPals) {
-      this.palCollectionService.palCollection = JSON.parse(this.savedPals);
-    }
+  }
+
+  ngOnInit() {
+     this.palCollectionService.loadPals();
+     
   }
 } 

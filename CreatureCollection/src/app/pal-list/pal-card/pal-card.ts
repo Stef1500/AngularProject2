@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef} from '@angular/core';
 import { Pal } from '../../models/pal';
 import { PalCollection } from '../../service/pal-collection';
 @Component({
@@ -10,11 +10,23 @@ import { PalCollection } from '../../service/pal-collection';
 export class PalCard {
   palImage = 'Anubis_icon.png';
   favorite = 'favoritePalIcon.png';
+  private cdr = inject(ChangeDetectorRef);
 
   palCollectionService = inject(PalCollection);
 
-  palCards: Pal[] = this.palCollectionService.palCollection;
+  isloading = true;
 
+  ngOnInit() {
+    this.palCollectionService.loadPals().subscribe( (pals) => {
+      console.log(pals);
+      this.palCollectionService.palCollection = pals;
+      console.log(this.palCollectionService.palCollection);
+      this.isloading = false;
+
+      this.cdr.detectChanges(); //detects any changes in the array and acts accordingly
+    })
+
+  }
 
   
   onPalDelete(index: number) {

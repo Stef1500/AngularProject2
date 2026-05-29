@@ -13,6 +13,4 @@ export class PalList {
 
   palCollectionService = inject(PalCollection);
 
-  palList: Pal[] = this.palCollectionService.palCollection;
-
 }

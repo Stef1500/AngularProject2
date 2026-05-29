@@ -19,6 +19,16 @@ export class PalForm {
   palCollectionService = inject(PalCollection);
 
 
+  getFreeid(array: Pal[]) {
+    let id = 0;
+
+    while (array.some(item => item.palId === id)) { //array.some checks if an element in the array matchs the given condition. True if it does.
+      id++;
+    }
+    return id;
+  }
+
+
   submitPal() {
     const newPalName = this.palName.value?.trim();
     const newPalType = this.palType.value?.trim();
@@ -34,13 +44,14 @@ export class PalForm {
 
     if(newPalName && newPalLevel && newPalType) {
       const createdPal: Pal = {
+        palId: this.getFreeid(this.palCollectionService.palCollection),
         palName: newPalName,
         palType: newPalType,
         palLevel: parseInt(newPalLevel),
         isFavorite: booleanFavorite
       };
-
-        this.palCollectionService.addPal(createdPal);
+      console.log(createdPal);
+      this.palCollectionService.addPal(createdPal);
     }
   }
 }

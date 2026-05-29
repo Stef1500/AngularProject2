@@ -1,5 +1,10 @@
+
 <section>
-    @for (pal of palCards; track $index) {
+    @if (isloading) {
+        <p>Loading your pal collection...</p>
+    }
+    @else {
+        @for (pal of palCollectionService.palCollection; track $index) {
         <div>
             <h3>{{pal.palName}}</h3>
             <img [src]="palImage">
@@ -12,6 +17,7 @@
             <button (click)="onPalTrained(pal.palLevel,$index)">Train</button>
             <button (click)="onPalDelete($index)">Delete</button>
         </div>
+        }
     }
     
 </section>
