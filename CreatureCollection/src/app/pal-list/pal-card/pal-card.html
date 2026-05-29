@@ -1,10 +1,6 @@
 
 <section>
-    @if (isloading) {
-        <p>Loading your pal collection...</p>
-    }
-    @else {
-        @for (pal of palCollectionService.palCollection; track $index) {
+        @for (pal of palCollectionService.palCollection(); track pal.palId) {
         <div>
             <h3>{{pal.palName}}</h3>
             <img [src]="palImage">
@@ -18,7 +14,6 @@
             <button (click)="onPalDelete(pal.palId)">Delete</button>
         </div>
         }
-    }
     
 </section>
 

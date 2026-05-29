@@ -19,8 +19,9 @@ export class PalForm {
   palCollectionService = inject(PalCollection);
 
 
-  getFreeid(array: Pal[]) {
+  getFreeid() {
     let id = 0;
+    const array = this.palCollectionService.palCollection();
 
     while (array.some(item => item.palId === id)) { //array.some checks if an element in the array matchs the given condition. True if it does.
       id++;
@@ -44,7 +45,7 @@ export class PalForm {
 
     if(newPalName && newPalLevel && newPalType) {
       const createdPal: Pal = {
-        palId: this.getFreeid(this.palCollectionService.palCollection),
+        palId: this.getFreeid(),
         palName: newPalName,
         palType: newPalType,
         palLevel: parseInt(newPalLevel),

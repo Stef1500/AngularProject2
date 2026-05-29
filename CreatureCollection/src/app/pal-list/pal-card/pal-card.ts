@@ -13,13 +13,11 @@ export class PalCard {
   private cdr = inject(ChangeDetectorRef);
 
   palCollectionService = inject(PalCollection);
-  isloading = true;
+  
 
   ngOnInit() {
-    this.palCollectionService.loadPals().subscribe((pals) => {
-      this.isloading = false;
-      this.cdr.detectChanges(); //detects any changes in the array and acts accordingly
-    })
+    this.palCollectionService.loadPals();
+    //this.cdr.detectChanges(); //detects any changes in the array and acts accordingly
 
   }
   
