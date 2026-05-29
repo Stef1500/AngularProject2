@@ -22,8 +22,4 @@ export class App {
   constructor() {
   }
 
-  ngOnInit() {
-     this.palCollectionService.loadPals();
-     
-  }
 } 

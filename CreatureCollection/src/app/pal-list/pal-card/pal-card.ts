@@ -13,24 +13,18 @@ export class PalCard {
   private cdr = inject(ChangeDetectorRef);
 
   palCollectionService = inject(PalCollection);
-
   isloading = true;
 
   ngOnInit() {
-    this.palCollectionService.loadPals().subscribe( (pals) => {
-      console.log(pals);
-      this.palCollectionService.palCollection = pals;
-      console.log(this.palCollectionService.palCollection);
+    this.palCollectionService.loadPals().subscribe((pals) => {
       this.isloading = false;
-
       this.cdr.detectChanges(); //detects any changes in the array and acts accordingly
     })
 
   }
-
   
-  onPalDelete(index: number) {
-    this.palCollectionService.handlePalDeletion(index);
+  onPalDelete(palId: number) {
+    this.palCollectionService.handlePalDeletion(palId);
   }
   onPalTrained(level: number, index: number) {
     if (level < 65) {

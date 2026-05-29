@@ -53,6 +53,7 @@ export class PalForm {
       console.log(createdPal);
       this.palCollectionService.addPal(createdPal);
     }
+    this.palName = new FormControl('');
   }
 }
 
